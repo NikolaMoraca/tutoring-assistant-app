@@ -1,0 +1,25 @@
+{
+  "name": "tutoring-assistant-app",
+  "version": "1.0.0",
+  "description": "This app helps manage student info, class logs, and attendance for my online math tutoring side-gig. Built with React, Node.js, and PostgreSQL.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NikolaMoraca/tutoring-assistant-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NikolaMoraca/tutoring-assistant-app/issues"
+  },
+  "homepage": "https://github.com/NikolaMoraca/tutoring-assistant-app#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "pg": "^8.15.6"
+  }
+}
