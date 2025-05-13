@@ -1,6 +1,13 @@
 // index.js
 const express = require('express');
 const app = express();
+const studentsRoutes = require('./routes/students');
+
+
+app.use(express.json());  // Middleware to parse JSON
+app.use('/api/students', studentsRoutes);
+
+
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
