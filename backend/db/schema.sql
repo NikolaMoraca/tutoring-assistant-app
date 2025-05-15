@@ -5,10 +5,20 @@ DROP TABLE IF EXISTS homeworks;
 DROP TABLE IF EXISTS payments;
 DROP TABLE IF EXISTS classes;
 DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS users;
+
+-- Users table
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    role TEXT CHECK (role IN ('admin', 'tutor')) DEFAULT 'tutor' NOT NULL
+);
 
 -- Students table
 CREATE TABLE students (
     id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE, -- Link students to a user
     name TEXT NOT NULL,
     email TEXT,
     pay_rate NUMERIC(6, 2) NOT NULL,

@@ -1,5 +1,5 @@
 // seed.js
-const pool = require('./backend/db/db');
+const pool = require('./db/db');
 
 // Array of test students
 const students = [

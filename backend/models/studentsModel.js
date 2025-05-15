@@ -1,13 +1,24 @@
 const db = require('../db/db');
 
-const getAllStudents = async () => {
-  const result = await db.query('SELECT * FROM students ORDER BY name ASC');
+const getAllStudents = async (limit,offset) => {
+  const result = await db.query(
+    'SELECT * FROM students ORDER BY name ASC LIMIT $1 OFFSET $2',
+    [limit, offset]
+  );
   return result.rows;
 };
 
 const getStudentById = async (id) => {
   const result = await db.query('SELECT * FROM students WHERE id = $1', [id]);
   return result.rows[0];
+};
+
+const searchStudents = async (query) => {
+  const result = await db.query(
+    `SELECT * FROM students WHERE name ILIKE $1 ORDER BY name ASC`,
+    [`%${query}%`]
+  );
+  return result.rows;
 };
 
 const createStudent = async ({ name, email, pay_rate, zoom_link, weekly_schedule }) => {
@@ -35,6 +46,7 @@ const deleteStudent = async (id) => {
 module.exports = {
   getAllStudents,
   getStudentById,
+  searchStudents,
   createStudent,
   updateStudent,
   deleteStudent,

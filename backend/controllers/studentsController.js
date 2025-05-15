@@ -1,8 +1,11 @@
-const Student = require('../models/studentModel');
+const Student = require('../models/studentsModel');
 
 exports.getAllStudents = async (req, res) => {
+  const { page = 1, limit = 10 } = req.query; // Default to page 1, 10 students per page
+  const offset = (page - 1) * limit;
+
   try {
-    const students = await Student.getAllStudents();
+    const students = await Student.getAllStudents(limit, offset);
     res.json(students);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -14,6 +17,16 @@ exports.getStudentById = async (req, res) => {
     const student = await Student.getStudentById(req.params.id);
     if (!student) return res.status(404).json({ error: 'Student not found' });
     res.json(student);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.searchStudents = async (req, res) => {
+  const { query } = req.query; // e.g., /api/students/search?query=Connor
+  try {
+    const students = await Student.searchStudents(query);
+    res.json(students);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
